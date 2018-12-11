@@ -1,6 +1,6 @@
 import fs from 'fs';
-import path from 'path';
 import test from 'ava';
+import glob from 'glob';
 import * as u from '../utils.js';
 
 test('It should be able to determine when something is valid;', t => {
@@ -15,16 +15,9 @@ test('It should be able to tell whether an entry is a valid code block;', t => {
 });
 
 test('It should be able to parse the line numbers of the code blocks;', t => {
-    const content = {
-        mixed: fs.readFileSync(
-            path.resolve('./src/__tests__/mocks/mixed.md'),
-            'utf8'
-        ),
-        jsError: fs.readFileSync(
-            path.resolve('./src/__tests__/mocks/js-error.md'),
-            'utf8'
-        )
-    };
-    t.deepEqual(u.langLineNumbers(content.mixed), [1, 8]);
-    t.deepEqual(u.langLineNumbers(content.jsError), [5]);
+    const filenames = glob.sync('./src/__tests__/mocks/*.md');
+    const content = filenames
+        .map(filename => fs.readFileSync(filename, 'utf8'))
+        .join('\n');
+    t.deepEqual(u.langLineNumbers(content), [7, 17, 37, 46, 60, 84, 96]);
 });

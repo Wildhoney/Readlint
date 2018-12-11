@@ -2,74 +2,54 @@ import path from 'path';
 import test from 'ava';
 import runTest from '../';
 
-test('It should be able to parse JS with full URL imports;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/url-import.md');
-    t.deepEqual(await runTest(file), []);
-});
-
-test('It should be able to parse JS with node style requires;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/require.md');
-    t.deepEqual(await runTest(file), []);
-});
-
-test('It should be able to parse CSS styles;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/styles.md');
-    t.deepEqual(await runTest(file), []);
-});
-
-test('It should be able to parse mixed JS/CSS;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/mixed.md');
-    t.deepEqual(await runTest(file), []);
-});
-
-test('It should be able to detect JS syntax errors;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/js-error.md');
+test('It should be able to parse JavaScript snippets;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/javascript.md');
     t.deepEqual(await runTest(file), [
         {
             type: 'eslint',
-            line: 6,
+            line: 8,
             column: 1,
             message: "'consta' is not defined."
         },
         {
             type: 'eslint',
-            line: 7,
+            line: 9,
             column: 1,
             message: "'constb' is not defined."
         },
         {
             type: 'eslint',
-            line: 9,
+            line: 11,
             column: 13,
             message: "'a' is not defined."
         },
         {
             type: 'eslint',
-            line: 9,
+            line: 11,
             column: 17,
             message: "'b' is not defined."
         }
     ]);
 });
 
-test('It should be able to detect CSS syntax errors;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/css-error.md');
+test('It should be able to parse CSS snippets;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/css.md');
     t.deepEqual(await runTest(file), [
         {
             type: 'stylelint',
-            line: 8,
+            line: 10,
             column: 1,
             message: 'Unexpected } (CssSyntaxError)'
         }
     ]);
 });
 
-test('It should be able to detect JSON syntax errors;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/json-error.md');
+test('It should be able to parse JSON snippets;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/json.md');
     t.deepEqual(await runTest(file), [
         {
             type: 'jsonlint',
-            line: 6,
+            line: 24,
             column: 9,
             message:
                 "Unknown Character 'e', expecting a string for key statement."
