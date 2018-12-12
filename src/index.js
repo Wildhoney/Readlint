@@ -20,8 +20,12 @@ export const eslint = ({ entry, startLine }) => {
             line: startLine + line,
             column
         }));
-    const report = cli.executeOnText(entry.text);
-    return report.errorCount > 0 ? parseErrors(report) : null;
+    try {
+        const report = cli.executeOnText(entry.text);
+        return report.errorCount > 0 ? parseErrors(report) : null;
+    } catch (err) {
+        return null;
+    }
 };
 
 export const stylelint = async ({ entry, startLine }) => {
@@ -32,11 +36,15 @@ export const stylelint = async ({ entry, startLine }) => {
             line: startLine + line,
             column
         }));
-    const report = await StyleLint.lint({
-        code: entry.text,
-        formatter: 'json'
-    });
-    return report.errored ? parseErrors(report) : null;
+    try {
+        const report = await StyleLint.lint({
+            code: entry.text,
+            formatter: 'json'
+        });
+        return report.errored ? parseErrors(report) : null;
+    } catch (err) {
+        return null;
+    }
 };
 
 export const jsonlint = ({ entry, startLine }) => {
@@ -60,11 +68,15 @@ export const htmllint = async ({ entry, startLine }) => {
             line: startLine + line,
             column
         }));
-    const config = JSON.parse(
-        fs.readFileSync(await findUp('.htmllintrc'), 'utf8')
-    );
-    const report = await HTMLLint(entry.text, config);
-    return report.length > 0 ? parseErrors(report) : null;
+    try {
+        const config = JSON.parse(
+            fs.readFileSync(await findUp('.htmllintrc'), 'utf8')
+        );
+        const report = await HTMLLint(entry.text, config);
+        return report.length > 0 ? parseErrors(report) : null;
+    } catch (err) {
+        return null;
+    }
 };
 
 export const lint = async ({ entry, startLine }) => {
