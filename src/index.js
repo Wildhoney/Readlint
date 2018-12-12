@@ -3,6 +3,8 @@ import marked from 'marked';
 import { CLIEngine } from 'eslint';
 import StyleLint from 'stylelint';
 import JSONLint from 'json-lint';
+import HTMLLint from 'htmllint';
+import findUp from 'find-up';
 import * as u from './utils.js';
 
 const cli = new CLIEngine({
@@ -38,18 +40,31 @@ export const stylelint = async ({ entry, startLine }) => {
 };
 
 export const jsonlint = ({ entry, startLine }) => {
-    const parseErrors = ({ error, line, character }) => {
-        return [
-            {
-                type: 'jsonlint',
-                message: error,
-                line: startLine + line,
-                column: character
-            }
-        ];
-    };
+    const parseErrors = ({ error, line, character }) => [
+        {
+            type: 'jsonlint',
+            message: error,
+            line: startLine + line,
+            column: character
+        }
+    ];
     const report = JSONLint(entry.text);
     return report.error ? parseErrors(report) : null;
+};
+
+export const htmllint = async ({ entry, startLine }) => {
+    const parseErrors = errors =>
+        errors.map(({ rule, line, column }) => ({
+            type: 'htmllint',
+            message: rule,
+            line: startLine + line,
+            column
+        }));
+    const config = JSON.parse(
+        fs.readFileSync(await findUp('.htmllintrc'), 'utf8')
+    );
+    const report = await HTMLLint(entry.text, config);
+    return report.length > 0 ? parseErrors(report) : null;
 };
 
 export const lint = async ({ entry, startLine }) => {
@@ -60,6 +75,8 @@ export const lint = async ({ entry, startLine }) => {
             return stylelint({ entry, startLine });
         case 'json':
             return jsonlint({ entry, startLine });
+        case 'html':
+            return htmllint({ entry, startLine });
     }
 };
 

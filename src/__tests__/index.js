@@ -56,3 +56,15 @@ test('It should be able to parse JSON snippets;', async t => {
         }
     ]);
 });
+
+test('It should be able to parse HTML snippets;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/html.md');
+    t.deepEqual(await runTest(file), [
+        {
+            type: 'htmllint',
+            line: 18,
+            column: 1,
+            message: 'tag-close'
+        }
+    ]);
+});

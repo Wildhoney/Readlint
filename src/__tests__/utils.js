@@ -19,5 +19,15 @@ test('It should be able to parse the line numbers of the code blocks;', t => {
     const content = filenames
         .map(filename => fs.readFileSync(filename, 'utf8'))
         .join('\n');
-    t.deepEqual(u.langLineNumbers(content), [7, 17, 37, 46, 60, 84, 96]);
+    t.deepEqual(u.langLineNumbers(content), [
+        7,
+        17,
+        39,
+        47,
+        61,
+        70,
+        84,
+        108,
+        120
+    ]);
 });
