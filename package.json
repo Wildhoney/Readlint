@@ -1,7 +1,7 @@
 {
     "name": "readlint",
     "description": "Inline code block linting for the README generation.",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "main": "src/index.js",
     "bin": {
         "readlint": "bin/index.js"
