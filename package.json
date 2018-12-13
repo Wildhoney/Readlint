@@ -6,6 +6,7 @@
   "author": "Adam Timberlake <adam.timberlake@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "marked": "^0.5.2"
+    "marked": "^0.5.2",
+    "puppeteer": "~1.9.0"
   }
 }
