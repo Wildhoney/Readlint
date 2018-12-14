@@ -1,7 +1,5 @@
 - name: format
-  tasks: 
-    - prettier --write 'src/**/*.{js,css}'
-    - prettier --write '*.{js,json}'
+  task: prettier --write 'src/**/*.{js,css}'
 
 - name: test/spec
   task: ava
