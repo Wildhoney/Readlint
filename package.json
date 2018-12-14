@@ -1,5 +1,6 @@
 {
-    "name": "lintme",
+    "name": "@wildhoney/lintme",
+    "description": "Inline code block linting for the README generation.",
     "version": "0.1.0",
     "main": "src/index.js",
     "repository": "git@github.com:Wildhoney/Lintme.git",
