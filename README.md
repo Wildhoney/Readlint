@@ -1,4 +1,4 @@
-<img src="media/screenshot.png" alt="Lintme" />
+# Lintme
 
 > Inline code block linting for the README generation.
 
@@ -13,5 +13,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
 **npm**: `npm install @wildhoney/lintme --save`
+
+<img src="media/screenshot.png" alt="Lintme" />
 
 ## Getting Started
