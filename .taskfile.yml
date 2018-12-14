@@ -7,6 +7,11 @@
 - name: test/lint
   task: eslint "{src,bin}/**/*.js"
 
+- name: test/coverage
+  tasks:
+    - nyc ava
+    - - nyc report --reporter=text-lcov | coveralls
+
 - name: test
   tasks:
       - taskfile test/spec
