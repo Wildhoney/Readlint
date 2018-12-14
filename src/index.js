@@ -4,17 +4,24 @@ import * as R from 'ramda';
 import { CLIEngine } from 'eslint';
 import StyleLint from 'stylelint';
 import Prettier from 'prettier';
+import normalise from 'normalize-newline';
 
 const cli = new CLIEngine({
     envs: ['browser'],
     useEslintrc: true
 });
 
-export const isValidRule = R.complement(R.isNil);
+export const isValid = R.complement(R.isNil);
 
-export const eslint = ({ entry }) => {
+export const eslint = ({ entry, startLine }) => {
+    const parseErrors = report =>
+        report.results[0].messages.map(({ message, line, column }) => ({
+            message,
+            line: startLine + line,
+            column
+        }));
     const report = cli.executeOnText(entry.text);
-    return report.errorCount > 0 ? report.results : null;
+    return report.errorCount > 0 ? parseErrors(report) : null;
 };
 
 export const stylelint = async ({ entry }) => {
@@ -31,20 +38,39 @@ export const prettier = async ({ entry, filename }) => {
     return report || null;
 };
 
-export const lint = ({ entry, filename }) => {
+export const lint = ({ entry, filename, startLine }) => {
     switch (entry.lang) {
         case 'javascript':
-            return [].concat(eslint({ entry }), prettier({ entry, filename }));
+            return [].concat(
+                eslint({ entry, startLine }),
+                prettier({ entry, filename, startLine })
+            );
         case 'css':
-            return stylelint({ entry });
+            return stylelint({ entry, startLine });
     }
+};
+
+export const isCodeBlock = entry => entry.lang;
+
+export const langLineNumbers = content => {
+    const lines = normalise(content).split('\n');
+    return lines
+        .map((line, lineNumber) => {
+            const isCodeBlock = line.match(/^```/);
+            return isCodeBlock ? lineNumber + 1 : null;
+        })
+        .filter(isValid);
 };
 
 export default async filename => {
     const content = fs.readFileSync(filename, 'utf8');
     const ast = marked.lexer(content);
+    const lines = langLineNumbers(content);
     const reports = await Promise.all(
-        ast.flatMap(entry => lint({ entry, filename }))
+        ast.filter(isCodeBlock).flatMap((entry, index) => {
+            const startLine = lines[index];
+            return lint({ entry, startLine, filename });
+        })
     );
-    return reports.filter(isValidRule);
+    return reports.filter(isValid);
 };
