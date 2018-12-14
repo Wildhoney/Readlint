@@ -1,4 +1,4 @@
-# Lintme
+<img src="media/screenshot.png" alt="Lintme" />
 
 > Inline code block linting for the README generation.
 
@@ -15,7 +15,3 @@
 **npm**: `npm install @wildhoney/lintme --save`
 
 ## Getting Started
-
-```
-...
-```
