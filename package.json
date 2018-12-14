@@ -11,6 +11,7 @@
         "test": "taskfile test",
         "lint": "taskfile test/lint",
         "spec": "taskfile test/spec",
+        "coverage": "taskfile test/coverage",
         "format": "taskfile format"
     },
     "ava": {
