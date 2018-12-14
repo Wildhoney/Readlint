@@ -1,14 +1,13 @@
 - name: format
-  task: prettier --write 'src/**/*.{js,css}'
+  task: prettier --write '{src,bin}/**/*.{js,css}'
 
 - name: test/spec
   task: ava
 
 - name: test/lint
-  task: eslint "src/**/*.js"
+  task: eslint "{src,bin}/**/*.js"
 
 - name: test
   tasks:
       - taskfile test/spec
       - - taskfile test/lint
-      # - - - taskfile test/integration
