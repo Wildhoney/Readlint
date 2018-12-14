@@ -16,3 +16,8 @@ test('It should be able to parse CSS examples;', async t => {
     const file = path.resolve('./src/__tests__/mocks/BASIC_CSS.md');
     t.deepEqual(await runTest(file), []);
 });
+
+test('It should be able to parse JS/CSS mixed examples;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/MIXED_JS_CSS.md');
+    t.deepEqual(await runTest(file), []);
+});
