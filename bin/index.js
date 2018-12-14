@@ -14,7 +14,7 @@ async function main() {
     const report = await runTest(filename);
     const isValid = R.isEmpty(report);
 
-    figlet('Lintme', { font: 'univers' }, (_, data) => {
+    figlet('Lintmd', { font: 'univers' }, (_, data) => {
         console.log(chalk.gray(data));
 
         report.forEach(({ type, line, column, message }) => {
