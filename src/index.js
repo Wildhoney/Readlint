@@ -13,6 +13,7 @@ const cli = new CLIEngine({
 export const eslint = ({ entry, startLine }) => {
     const parseErrors = report =>
         report.results[0].messages.map(({ message, line, column }) => ({
+            type: 'eslint',
             message,
             line: startLine + line,
             column

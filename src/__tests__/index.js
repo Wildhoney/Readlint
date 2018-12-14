@@ -26,21 +26,25 @@ test('It should be able to detect JS syntax errors;', async t => {
     const file = path.resolve('./src/__tests__/mocks/syntax-error.md');
     t.deepEqual(await runTest(file), [
         {
+            type: 'eslint',
             line: 6,
             column: 1,
             message: "'consta' is not defined."
         },
         {
+            type: 'eslint',
             line: 7,
             column: 1,
             message: "'constb' is not defined."
         },
         {
+            type: 'eslint',
             line: 9,
             column: 13,
             message: "'a' is not defined."
         },
         {
+            type: 'eslint',
             line: 9,
             column: 17,
             message: "'b' is not defined."
