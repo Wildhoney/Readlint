@@ -1,17 +1,14 @@
 import fs from 'fs';
 import marked from 'marked';
-import * as R from 'ramda';
 import { CLIEngine } from 'eslint';
 import StyleLint from 'stylelint';
 import Prettier from 'prettier';
-import normalise from 'normalize-newline';
+import * as u from './utils.js';
 
 const cli = new CLIEngine({
     envs: ['browser'],
     useEslintrc: true
 });
-
-export const isValid = R.complement(R.isNil);
 
 export const eslint = ({ entry, startLine }) => {
     const parseErrors = report =>
@@ -50,27 +47,15 @@ export const lint = ({ entry, filename, startLine }) => {
     }
 };
 
-export const isCodeBlock = entry => entry.lang;
-
-export const langLineNumbers = content => {
-    const lines = normalise(content).split('\n');
-    return lines
-        .map((line, lineNumber) => {
-            const isCodeBlock = line.match(/^```/);
-            return isCodeBlock ? lineNumber + 1 : null;
-        })
-        .filter(isValid);
-};
-
 export default async filename => {
     const content = fs.readFileSync(filename, 'utf8');
     const ast = marked.lexer(content);
-    const lines = langLineNumbers(content);
+    const lines = u.langLineNumbers(content);
     const reports = await Promise.all(
-        ast.filter(isCodeBlock).flatMap((entry, index) => {
+        ast.filter(u.isCodeBlock).flatMap((entry, index) => {
             const startLine = lines[index];
             return lint({ entry, startLine, filename });
         })
     );
-    return reports.filter(isValid);
+    return reports.filter(u.isValid);
 };
