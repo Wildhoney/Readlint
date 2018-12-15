@@ -22,6 +22,16 @@
             "esm"
         ]
     },
+    "babel": {
+        "presets": [
+            ["@babel/preset-env", {
+              "loose": true,
+              "targets": {
+                "node": "6.9"
+              }
+            }]
+          ]
+    },
     "dependencies": {
         "@babel/preset-env": "^7.2.0",
         "@babel/register": "^7.0.0",
