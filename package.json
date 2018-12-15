@@ -14,9 +14,7 @@
         "lint": "taskfile test/lint",
         "spec": "taskfile test/spec",
         "coverage": "taskfile test/coverage",
-        "format": "taskfile format",
-        "prepublishOnly": "taskfile prepublish",
-        "postpublish": "taskfile postpublish"
+        "format": "taskfile format"
     },
     "ava": {
         "failFast": true,
