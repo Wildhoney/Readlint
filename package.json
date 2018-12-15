@@ -1,5 +1,5 @@
 {
-    "name": "lintme",
+    "name": "@wildhoney/lintme",
     "description": "Inline code block linting for the README generation.",
     "version": "0.2.0",
     "main": "src/index.js",
