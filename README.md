@@ -4,7 +4,7 @@
 
 ![Travis](http://img.shields.io/travis/Wildhoney/Lintme.svg?style=for-the-badge)
 &nbsp;
-![npm](http://img.shields.io/npm/v/lintme.svg?style=for-the-badge)
+![npm](http://img.shields.io/npm/v/@wildhoney/lintme.svg?style=for-the-badge)
 &nbsp;
 ![License MIT](http://img.shields.io/badge/license-mit-lightgrey.svg?style=for-the-badge)
 &nbsp;
