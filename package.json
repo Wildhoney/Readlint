@@ -14,7 +14,8 @@
         "lint": "taskfile test/lint",
         "spec": "taskfile test/spec",
         "coverage": "taskfile test/coverage",
-        "format": "taskfile format"
+        "format": "taskfile format",
+        "postinstall": "npm i yarn && yarn"
     },
     "ava": {
         "failFast": true,
