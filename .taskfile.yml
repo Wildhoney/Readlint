@@ -16,3 +16,13 @@
   tasks:
       - taskfile test/spec
       - - taskfile test/lint
+
+- name: prepublish
+  tasks:
+    - cp bin/index.js bin/index_o.js
+    - - babel bin/index_o.js --out-file bin/index.js
+
+- name: postpublish
+  tasks:
+     - cp bin/index_o.js bin/index.js
+     - - rm bin/index_o.js

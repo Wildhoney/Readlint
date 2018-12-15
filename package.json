@@ -14,25 +14,14 @@
         "lint": "taskfile test/lint",
         "spec": "taskfile test/spec",
         "coverage": "taskfile test/coverage",
-        "format": "taskfile format"
+        "format": "taskfile format",
+        "prepublishOnly": "taskfile prepublish",
+        "postpublish": "taskfile postpublish"
     },
     "ava": {
         "failFast": true,
         "require": [
             "esm"
-        ]
-    },
-    "babel": {
-        "presets": [
-            [
-                "@babel/preset-env",
-                {
-                    "loose": true,
-                    "targets": {
-                        "node": "6.9"
-                    }
-                }
-            ]
         ]
     },
     "dependencies": {
@@ -56,6 +45,7 @@
         "stylelint": "^9.9.0"
     },
     "devDependencies": {
+        "@babel/cli": "^7.2.0",
         "ava": "^0.25.0",
         "eslint-config-prettier": "^3.3.0",
         "eslint-config-standard": "^12.0.0",
