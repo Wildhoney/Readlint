@@ -22,12 +22,19 @@ export const eslint = ({ entry, startLine }) => {
     return report.errorCount > 0 ? parseErrors(report) : null;
 };
 
-export const stylelint = async ({ entry }) => {
+export const stylelint = async ({ entry, startLine }) => {
+    const parseErrors = report =>
+        report.results[0].warnings.map(({ text, line, column }) => ({
+            type: 'stylelint',
+            message: text,
+            line: startLine + line,
+            column
+        }));
     const report = await StyleLint.lint({
         code: entry.text,
         formatter: 'json'
     });
-    return report.errored ? report : null;
+    return report.errored ? parseErrors(report) : null;
 };
 
 export const prettier = async ({ entry, filename }) => {
@@ -36,12 +43,12 @@ export const prettier = async ({ entry, filename }) => {
     return report || null;
 };
 
-export const lint = ({ entry, filename, startLine }) => {
+export const lint = async ({ entry, filename, startLine }) => {
     switch (entry.lang) {
         case 'javascript':
             return [].concat(
                 eslint({ entry, startLine }),
-                prettier({ entry, filename, startLine })
+                await prettier({ entry, filename, startLine })
             );
         case 'css':
             return stylelint({ entry, startLine });
@@ -53,10 +60,10 @@ export default async filename => {
     const ast = marked.lexer(content);
     const lines = u.langLineNumbers(content);
     const reports = await Promise.all(
-        ast.filter(u.isCodeBlock).flatMap((entry, index) => {
+        ast.filter(u.isCodeBlock).map((entry, index) => {
             const startLine = lines[index];
             return lint({ entry, startLine, filename });
         })
     );
-    return reports.filter(u.isValid);
+    return reports.flat().filter(u.isValid);
 };
