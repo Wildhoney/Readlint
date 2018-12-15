@@ -3,7 +3,9 @@
     "description": "Inline code block linting for the README generation.",
     "version": "0.2.2",
     "main": "src/index.js",
-    "bin": "bin/index.js",
+    "bin": {
+        "readlint": "bin/readlint.js"
+    },
     "repository": "git@github.com:Wildhoney/Readlint.git",
     "author": "Adam Timberlake <adam.timberlake@gmail.com>",
     "license": "MIT",
