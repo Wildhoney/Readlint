@@ -20,11 +20,11 @@ test('It should be able to parse the line numbers of the code blocks;', t => {
             path.resolve('./src/__tests__/mocks/mixed.md'),
             'utf8'
         ),
-        syntaxError: fs.readFileSync(
-            path.resolve('./src/__tests__/mocks/syntax-error.md'),
+        jsError: fs.readFileSync(
+            path.resolve('./src/__tests__/mocks/js-error.md'),
             'utf8'
         )
     };
     t.deepEqual(u.langLineNumbers(content.mixed), [1, 8]);
-    t.deepEqual(u.langLineNumbers(content.syntaxError), [5]);
+    t.deepEqual(u.langLineNumbers(content.jsError), [5]);
 });

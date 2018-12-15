@@ -23,7 +23,7 @@ test('It should be able to parse mixed JS/CSS;', async t => {
 });
 
 test('It should be able to detect JS syntax errors;', async t => {
-    const file = path.resolve('./src/__tests__/mocks/syntax-error.md');
+    const file = path.resolve('./src/__tests__/mocks/js-error.md');
     t.deepEqual(await runTest(file), [
         {
             type: 'eslint',
