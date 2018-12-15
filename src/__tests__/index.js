@@ -51,3 +51,15 @@ test('It should be able to detect JS syntax errors;', async t => {
         }
     ]);
 });
+
+test('It should be able to detect CSS syntax errors;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/css-error.md');
+    t.deepEqual(await runTest(file), [
+        {
+            type: 'stylelint',
+            line: 8,
+            column: 1,
+            message: 'Unexpected } (CssSyntaxError)'
+        }
+    ]);
+});
