@@ -1,7 +1,7 @@
 {
     "name": "readlint",
     "description": "Inline code block linting for the README generation.",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "main": "src/index.js",
     "bin": {
         "readlint": "bin/index.js"
@@ -24,13 +24,16 @@
     },
     "babel": {
         "presets": [
-            ["@babel/preset-env", {
-              "loose": true,
-              "targets": {
-                "node": "6.9"
-              }
-            }]
-          ]
+            [
+                "@babel/preset-env",
+                {
+                    "loose": true,
+                    "targets": {
+                        "node": "6.9"
+                    }
+                }
+            ]
+        ]
     },
     "dependencies": {
         "@babel/preset-env": "^7.2.0",
