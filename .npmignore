@@ -1,0 +1,16 @@
+.babelrc
+.eslintrc
+.gitignore
+.npmignore
+.npmrc
+.prettierrc.json
+.stylelintrc
+.taskfile.yml
+.travis.yml
+
+rollup.config.js
+yarn.lock
+
+bin/index_backup.js
+media/
+src/__tests__/
