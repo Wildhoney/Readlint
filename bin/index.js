@@ -28,12 +28,12 @@ async function main() {
                 chalk.bgRedBright(` ${type} `),
                 chalk.gray(':'),
                 chalk.underline.white('Line'),
-                chalk.underline.redBright(line),
+                chalk.redBright(line),
                 chalk.gray('/'),
                 chalk.underline.white('Column'),
                 chalk.redBright(column),
                 chalk.gray(':'),
-                message,
+                chalk.whiteBright(message),
                 '\n'
             );
         });
