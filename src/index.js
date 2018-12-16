@@ -39,7 +39,7 @@ export const stylelint = async ({ entry, startLine }) => {
 
 export const prettier = async ({ entry, filename }) => {
     const config = await Prettier.resolveConfig(filename);
-    const report = Prettier.check(entry.text, config);
+    const report = Prettier.check(entry.text, {parser: "babylon",...config});
     return report || null;
 };
 
