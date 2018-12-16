@@ -1,5 +1,5 @@
 - name: format
-  task: prettier --write '{src,bin}/**/*.{js,css}'
+  task: prettier --write '{src,bin}/**/*.js'
 
 - name: test/spec
   task: ava
