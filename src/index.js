@@ -2,6 +2,7 @@ import fs from 'fs';
 import marked from 'marked';
 import { CLIEngine } from 'eslint';
 import StyleLint from 'stylelint';
+import JSONLint from 'json-lint';
 import * as u from './utils.js';
 
 const cli = new CLIEngine({
@@ -36,12 +37,29 @@ export const stylelint = async ({ entry, startLine }) => {
     return report.errored ? parseErrors(report) : null;
 };
 
+export const jsonlint = ({ entry, startLine }) => {
+    const parseErrors = ({ error, line, character }) => {
+        return [
+            {
+                type: 'jsonlint',
+                message: error,
+                line: startLine + line,
+                column: character
+            }
+        ];
+    };
+    const report = JSONLint(entry.text);
+    return report.error ? parseErrors(report) : null;
+};
+
 export const lint = async ({ entry, startLine }) => {
     switch (entry.lang) {
         case 'javascript':
             return eslint({ entry, startLine });
         case 'css':
             return stylelint({ entry, startLine });
+        case 'json':
+            return jsonlint({ entry, startLine });
     }
 };
 
