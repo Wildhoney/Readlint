@@ -2,7 +2,6 @@ import fs from 'fs';
 import marked from 'marked';
 import { CLIEngine } from 'eslint';
 import StyleLint from 'stylelint';
-import Prettier from 'prettier';
 import * as u from './utils.js';
 
 const cli = new CLIEngine({
@@ -37,19 +36,10 @@ export const stylelint = async ({ entry, startLine }) => {
     return report.errored ? parseErrors(report) : null;
 };
 
-export const prettier = async ({ entry, filename }) => {
-    const config = await Prettier.resolveConfig(filename);
-    const report = Prettier.check(entry.text, { parser: 'babylon', ...config });
-    return report || null;
-};
-
-export const lint = async ({ entry, filename, startLine }) => {
+export const lint = async ({ entry, startLine }) => {
     switch (entry.lang) {
         case 'javascript':
-            return [].concat(
-                eslint({ entry, startLine }),
-                await prettier({ entry, filename, startLine })
-            );
+            return eslint({ entry, startLine });
         case 'css':
             return stylelint({ entry, startLine });
     }
@@ -62,7 +52,7 @@ export default async filename => {
     const reports = await Promise.all(
         ast.filter(u.isCodeBlock).map((entry, index) => {
             const startLine = lines[index];
-            return lint({ entry, startLine, filename });
+            return lint({ entry, startLine });
         })
     );
     return reports.flat().filter(u.isValid);
