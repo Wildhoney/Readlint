@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
-require('@babel/register');
-
-const fs = require('fs');
-const path = require('path');
-const findUp = require('find-up');
-const chalk = require('chalk');
-const figlet = require('figlet');
-const R = require('ramda');
-const message = require('msg-generator');
-const capitalise = require('capitalize');
-const runTest = require('../src/index.js').default;
+import fs from 'fs';
+import path from 'path';
+import findUp from 'find-up';
+import chalk from 'chalk';
+import figlet from 'figlet';
+import R from 'ramda';
+import message from 'msg-generator';
+import capitalise from 'capitalize';
+import runTest from '../src/index.js';
 
 const pkg = JSON.parse(fs.readFileSync(path.resolve('./package.json'), 'utf8'));
 
