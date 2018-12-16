@@ -17,3 +17,15 @@
 <img src="media/screenshot.png" alt="Readlint" />
 
 ## Getting Started
+
+Using `readlint` is as easy as installing it, and then running it local to your project. There is no configuration as `eslint` and `stylelint` takes its configuration from their respective config files, which ideally should be the same as the config you're using for the entire project.
+
+**`package.json`**
+
+```json
+{
+    "scripts": {
+        "lint": "eslint stylelint && readlint"
+    }
+}
+```
