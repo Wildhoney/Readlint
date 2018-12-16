@@ -3,7 +3,7 @@ node_js: stable
 cache: false
 
 script:
-    - npm i
+    - npm i yarn
     - yarn
     - yarn test
 
