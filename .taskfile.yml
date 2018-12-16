@@ -5,7 +5,9 @@
   task: ava
 
 - name: test/lint
-  task: eslint "{src,bin}/**/*.js"
+  tasks:
+    - node -r @babel/register bin/index.js
+    - - eslint "{src,bin}/**/*.js"
 
 - name: test/coverage
   tasks:
