@@ -10,7 +10,9 @@ import message from 'msg-generator';
 import capitalise from 'capitalize';
 import runTest from '../src/index.js';
 
-const pkg = JSON.parse(fs.readFileSync(path.resolve(`${__dirname}/../package.json`), 'utf8'));
+const pkg = JSON.parse(
+    fs.readFileSync(path.resolve(`${__dirname}/../package.json`), 'utf8')
+);
 
 async function main() {
     const filename = await findUp('README.md');
