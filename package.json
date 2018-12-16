@@ -14,7 +14,9 @@
         "lint": "taskfile test/lint",
         "spec": "taskfile test/spec",
         "coverage": "taskfile test/coverage",
-        "format": "taskfile format"
+        "format": "taskfile format",
+        "prepublishOnly": "taskfile prepublish",
+        "postpublish": "taskfile postpublish"
     },
     "ava": {
         "failFast": true,
@@ -53,6 +55,9 @@
         "eslint-plugin-standard": "^4.0.0",
         "esm": "^3.0.84",
         "nyc": "^13.1.0",
+        "rollup": "^0.67.4",
+        "rollup-plugin-babel": "^4.1.0",
+        "rollup-plugin-replace": "^2.1.0",
         "stylelint-config-prettier": "^4.0.0",
         "taskfile": "^0.8.5"
     }

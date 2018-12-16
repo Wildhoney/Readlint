@@ -14,5 +14,13 @@
 
 - name: test
   tasks:
-      - taskfile test/spec
-      - - taskfile test/lint
+    - taskfile test/spec
+    - - taskfile test/lint
+
+- name: prepublish
+  tasks:
+    - cp bin/index.js bin/index_backup.js
+    - - rollup -c rollup.config.js
+
+- name: postpublish
+  task: mv bin/index_backup.js bin/index.js
