@@ -39,4 +39,3 @@ Using `readlint` is as easy as installing it, and then running it local to your 
 | `json`       | `jsonlint`  | No                      |
 | `html`       | `htmllint`  | Yes                     |
 | `yaml`       | `yamllint`  | No                      |
-| -------------| ----------- | ------------------------|
