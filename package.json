@@ -62,6 +62,7 @@
         "rollup-plugin-babel": "^4.1.0",
         "rollup-plugin-replace": "^2.1.0",
         "stylelint-config-prettier": "^4.0.0",
-        "taskfile": "^0.8.5"
+        "taskfile": "^0.8.5",
+        "yaml-lint": "^1.2.4"
     }
 }
