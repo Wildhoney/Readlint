@@ -4,7 +4,7 @@ import { CLIEngine } from 'eslint';
 import StyleLint from 'stylelint';
 import JSONLint from 'json-lint';
 import HTMLLint from 'htmllint';
-import YAMLLint from "yaml-lint"
+import YAMLLint from 'yaml-lint';
 import findUp from 'find-up';
 import * as u from './utils.js';
 
@@ -80,16 +80,21 @@ export const htmllint = async ({ entry, startLine }) => {
     }
 };
 
-export const yamllint =async ({ entry, startLine }) => {
-    const parseErrors = ({ reason, mark: { line, position }}) => [{
-        type: 'yamllint', message:reason, line: startLine + line, column : position
-    }]
+export const yamllint = async ({ entry, startLine }) => {
+    const parseErrors = ({ reason, mark: { line, position } }) => [
+        {
+            type: 'yamllint',
+            message: reason,
+            line: startLine + line,
+            column: position
+        }
+    ];
     try {
         return await YAMLLint.lint(entry.text);
     } catch (err) {
         return parseErrors(err);
     }
-}
+};
 
 export const lint = async ({ entry, startLine }) => {
     switch (entry.lang) {
@@ -99,10 +104,12 @@ export const lint = async ({ entry, startLine }) => {
             return stylelint({ entry, startLine });
         case 'json':
             return jsonlint({ entry, startLine });
-            case 'html':
-                return htmllint({ entry, startLine });
-                case 'yaml':
-                    return yamllint({ entry, startLine });
+        case 'html':
+            return htmllint({ entry, startLine });
+        case 'yaml':
+            return yamllint({ entry, startLine });
+        default:
+            return null;
     }
 };
 

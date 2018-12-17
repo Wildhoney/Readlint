@@ -28,6 +28,10 @@ test('It should be able to parse the line numbers of the code blocks;', t => {
         70,
         84,
         108,
-        120
+        120,
+        136,
+        144,
+        163,
+        174
     ]);
 });
