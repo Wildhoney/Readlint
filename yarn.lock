@@ -3370,17 +3370,17 @@ html-tags@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
   integrity sha1-ELMKOGCF9Dzt41PMj6fLDe7qZos=
 
-htmllint@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/htmllint/-/htmllint-0.7.2.tgz#02e47416fa2dbeb30b5e2c3ed667e8a5407a8f34"
-  integrity sha1-AuR0FvotvrMLXiw+1mfopUB6jzQ=
+htmllint@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/htmllint/-/htmllint-0.7.3.tgz#b3a20514c0fdd7cd83af37f9d0e055a100e8a096"
+  integrity sha512-h8wfCu0CC0FVo18Jkygv7xqj0fa23Xlv4QsR2n34LDr8eqpf4glfbNg1HTbiCqpT3ONioMOfk8EkFUbZgrO1KA==
   dependencies:
     bulk-require "^1.0.1"
-    htmlparser2 "^3.9.2"
-    lodash "^4.17.4"
-    promise "^8.0.1"
+    htmlparser2 "^3.10.0"
+    lodash "^4.17.11"
+    promise "^8.0.2"
 
-htmlparser2@^3.9.2:
+htmlparser2@^3.10.0, htmlparser2@^3.9.2:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.0.tgz#5f5e422dcf6119c0d983ed36260ce9ded0bee464"
   integrity sha512-J1nEUGv+MkXS0weHNWVKJJ+UrLfePxRWpN3C9bEi9fLxL2+ggW94DQvgYVXsaT30PGwYRIZKNZXuyMhp3Di4bQ==
@@ -5480,7 +5480,7 @@ progress@^2.0.0:
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
   integrity sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==
 
-promise@^8.0.1:
+promise@^8.0.2:
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/promise/-/promise-8.0.2.tgz#9dcd0672192c589477d56891271bdc27547ae9f0"
   integrity sha512-EIyzM39FpVOMbqgzEHhxdrEhtOSDOtjMZQ0M6iVfCE+kWNgCkAyOdnuCWqfmflylftfadU6FkiMgHZA2kUzwRw==
