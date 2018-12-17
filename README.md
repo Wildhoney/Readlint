@@ -29,3 +29,14 @@ Using `readlint` is as easy as installing it, and then running it local to your 
     }
 }
 ```
+
+## Support Languages
+
+| Language     | Linter      | Requires Configuration? |
+| -------------| ----------- | ------------------------|
+| `javascript` | `eslint`    | Yes                     |
+| `css`        | `stylelint` | Yes                     |
+| `json`       | `jsonlint`  | No                      |
+| `html`       | `htmllint`  | Yes                     |
+| `yaml`       | `yamllint`  | No                      |
+| -------------| ----------- | ------------------------|
