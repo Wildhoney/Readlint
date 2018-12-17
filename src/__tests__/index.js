@@ -106,7 +106,13 @@ test('It should be able to parse YAML snippets;', async t => {
             type: 'yamllint',
             line: 20,
             column: 39,
-            message: 'can not read a block mapping entry; a multiline key may not be an implicit key'
+            message:
+                'can not read a block mapping entry; a multiline key may not be an implicit key'
         }
     ]);
+});
+
+test('It should be able to skip unsupported languages;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/unsupported.md');
+    t.deepEqual(await runTest(file), []);
 });
