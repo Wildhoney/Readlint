@@ -1,19 +1,9 @@
 import fs from 'fs';
 import marked from 'marked';
-import { CLIEngine } from 'eslint';
-import StyleLint from 'stylelint';
-import JSONLint from 'json-lint';
-import HTMLLint from 'htmllint';
-import YAMLLint from 'yaml-lint';
 import findUp from 'find-up';
 import * as u from './utils.js';
 
-const cli = new CLIEngine({
-    envs: ['browser'],
-    useEslintrc: true
-});
-
-export const eslint = ({ entry, startLine }) => {
+export const eslint = async ({ entry, startLine }) => {
     const parseErrors = report =>
         report.results[0].messages.map(({ message, line, column }) => ({
             type: 'eslint',
@@ -22,6 +12,11 @@ export const eslint = ({ entry, startLine }) => {
             column
         }));
     try {
+        const { CLIEngine } = await import('eslint');
+        const cli = new CLIEngine({
+            envs: ['browser'],
+            useEslintrc: true
+        });
         const report = cli.executeOnText(entry.text);
         return report.errorCount > 0 ? parseErrors(report) : null;
     } catch (err) {
@@ -38,6 +33,7 @@ export const stylelint = async ({ entry, startLine }) => {
             column
         }));
     try {
+        const StyleLint = await import('stylelint');
         const report = await StyleLint.lint({
             code: entry.text,
             formatter: 'json'
@@ -48,7 +44,7 @@ export const stylelint = async ({ entry, startLine }) => {
     }
 };
 
-export const jsonlint = ({ entry, startLine }) => {
+export const jsonlint = async ({ entry, startLine }) => {
     const parseErrors = ({ error, line, character }) => [
         {
             type: 'jsonlint',
@@ -57,8 +53,13 @@ export const jsonlint = ({ entry, startLine }) => {
             column: character
         }
     ];
-    const report = JSONLint(entry.text);
-    return report.error ? parseErrors(report) : null;
+    try {
+        const JSONLint = await import('json-lint');
+        const report = JSONLint.default(entry.text);
+        return report.error ? parseErrors(report) : null;
+    } catch (err) {
+        return null;
+    }
 };
 
 export const htmllint = async ({ entry, startLine }) => {
@@ -70,10 +71,11 @@ export const htmllint = async ({ entry, startLine }) => {
             column
         }));
     try {
+        const HTMLLint = await import('htmllint');
         const config = JSON.parse(
             fs.readFileSync(await findUp('.htmllintrc'), 'utf8')
         );
-        const report = await HTMLLint(entry.text, config);
+        const report = await HTMLLint.default(entry.text, config);
         return report.length > 0 ? parseErrors(report) : null;
     } catch (err) {
         return null;
@@ -90,9 +92,14 @@ export const yamllint = async ({ entry, startLine }) => {
         }
     ];
     try {
-        return await YAMLLint.lint(entry.text);
+        const YAMLLint = await import('yaml-lint');
+        try {
+            return await YAMLLint.lint(entry.text);
+        } catch (err) {
+            return parseErrors(err);
+        }
     } catch (err) {
-        return parseErrors(err);
+        return null;
     }
 };
 
