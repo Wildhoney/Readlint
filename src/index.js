@@ -24,6 +24,27 @@ export const eslint = async ({ entry, startLine }) => {
     }
 };
 
+export const jshint = async ({ entry, startLine }) => {
+    const parseErrors = report =>
+        report.errors.map(({ reason, line, character }) => ({
+            type: 'jshint',
+            message: reason,
+            line: startLine + line,
+            column: character
+        }));
+    try {
+        const config = JSON.parse(
+            fs.readFileSync(await findUp('.jshintrc'), 'utf8')
+        );
+        const { JSHINT } = await import('jshint');
+        await JSHINT.jshint(entry.text, config);
+        const report = JSHINT.data();
+        return report.errors ? parseErrors(report) : null;
+    } catch (err) {
+        return null;
+    }
+};
+
 export const stylelint = async ({ entry, startLine }) => {
     const parseErrors = report =>
         report.results[0].warnings.map(({ text, line, column }) => ({
@@ -106,7 +127,9 @@ export const yamllint = async ({ entry, startLine }) => {
 export const lint = async ({ entry, startLine }) => {
     switch (entry.lang) {
         case 'javascript':
-            return eslint({ entry, startLine });
+            return []
+                .concat(await eslint({ entry, startLine }))
+                .concat(await jshint({ entry, startLine }));
         case 'css':
             return stylelint({ entry, startLine });
         case 'json':
