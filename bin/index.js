@@ -21,8 +21,12 @@ async function main() {
     const isValid = R.isEmpty(report);
 
     figlet(capitalise(pkg.name), { font: 'univers' }, (_, data) => {
-        console.log(chalk.gray(data));
-        console.log(chalk.gray('Version:'.padStart(70)), pkg.version, '\n\n');
+        data && console.log(chalk.gray(data));
+        console.log(
+            chalk.gray('Version:'.padStart(data ? 70 : 0)),
+            pkg.version,
+            '\n\n'
+        );
 
         report.forEach(({ type, line, column, message }) => {
             console.log(
