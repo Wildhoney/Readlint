@@ -2,7 +2,7 @@
   task: prettier --write '{src,bin}/**/*.js'
 
 - name: test/spec
-  task: ava
+  task: nyc ava
 
 - name: test/lint
   tasks:
@@ -10,9 +10,7 @@
     - - eslint "{src,bin}/**/*.js"
 
 - name: test/coverage
-  tasks:
-    - nyc ava
-    - - nyc report --reporter=text-lcov | coveralls
+  task: nyc report --reporter=text-lcov | coveralls
 
 - name: test
   tasks:
