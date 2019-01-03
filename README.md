@@ -1,6 +1,6 @@
 # Readlint
 
-> Inline code block linting for the README generation.
+> Lint all of the code examples in your README documentation using shared configs.
 
 ![Travis](http://img.shields.io/travis/Wildhoney/Readlint.svg?style=for-the-badge)
 &nbsp;

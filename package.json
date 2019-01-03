@@ -1,6 +1,6 @@
 {
     "name": "readlint",
-    "description": "Inline code block linting for the README generation.",
+    "description": "Lint all of the code examples in your README documentation using shared configs.",
     "version": "0.6.1",
     "main": "src/index.js",
     "bin": {
