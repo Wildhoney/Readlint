@@ -36,9 +36,9 @@ export const jshint = async ({ entry, startLine }) => {
         const config = JSON.parse(
             fs.readFileSync(await findUp('.jshintrc'), 'utf8')
         );
-        const { JSHINT } = await import('jshint');
-        await JSHINT.jshint(entry.text, config);
-        const report = JSHINT.data();
+        const { JSHINT: JSHint } = await import('jshint');
+        await JSHint.jshint(entry.text, config);
+        const report = JSHint.data();
         return report.errors ? parseErrors(report) : null;
     } catch (err) {
         return null;
