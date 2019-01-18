@@ -1,7 +1,7 @@
 {
     "name": "readlint",
     "description": "Lint all of the code examples in your README documentation using shared configs.",
-    "version": "0.6.1",
+    "version": "0.7.0",
     "main": "src/index.js",
     "bin": {
         "readlint": "bin/index.js"
