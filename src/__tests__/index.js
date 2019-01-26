@@ -67,9 +67,9 @@ test('It should be able to parse CSS snippets;', async t => {
     t.deepEqual(await runTest(file), [
         {
             type: 'stylelint',
-            line: 10,
-            column: 1,
-            message: 'Unexpected } (CssSyntaxError)'
+            line: 9,
+            column: 5,
+            message: 'Unknown word (CssSyntaxError)'
         }
     ]);
 });
