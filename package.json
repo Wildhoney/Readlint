@@ -32,7 +32,7 @@
         "marked": "^0.6.0",
         "msg-generator": "^0.1.1",
         "normalize-newline": "^3.0.0",
-        "prettier": "^1.16.2",
+        "prettier": "^1.16.3",
         "ramda": "^0.26.1"
     },
     "devDependencies": {
