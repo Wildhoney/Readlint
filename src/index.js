@@ -144,14 +144,18 @@ export const lint = async ({ entry, startLine }) => {
 };
 
 export default async filename => {
-    const content = fs.readFileSync(filename, 'utf8');
-    const ast = marked.lexer(content);
-    const lines = u.langLineNumbers(content);
-    const reports = await Promise.all(
-        ast.filter(u.isCodeBlock).map((entry, index) => {
-            const startLine = lines[index];
-            return lint({ entry, startLine });
-        })
-    );
-    return reports.flat().filter(u.isValid);
+    try {
+        const content = fs.readFileSync(filename, 'utf8');
+        const ast = marked.lexer(content);
+        const lines = u.langLineNumbers(content);
+        const reports = await Promise.all(
+            ast.filter(u.isCodeBlock).map((entry, index) => {
+                const startLine = lines[index];
+                return lint({ entry, startLine });
+            })
+        );
+        return reports.flat().filter(u.isValid);
+    } catch {
+        return [];
+    }
 };

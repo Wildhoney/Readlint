@@ -116,3 +116,8 @@ test('It should be able to skip unsupported languages;', async t => {
     const file = path.resolve('./src/__tests__/mocks/unsupported.md');
     t.deepEqual(await runTest(file), []);
 });
+
+test('It should be able to pass gracefully when file does not exist;', async t => {
+    const file = path.resolve('./src/__tests__/mocks/nonexistent.md');
+    t.deepEqual(await runTest(file), []);
+});
